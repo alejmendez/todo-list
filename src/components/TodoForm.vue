@@ -1,13 +1,14 @@
 <script setup>
-import { ref, defineEmits } from 'vue'
+import { ref } from 'vue'
+import { useTodoListStore } from '../store/useTodoListStore'
 
-const emit = defineEmits(['submit'])
+const store = useTodoListStore()
 
 const todoText = ref('')
 const inputText = ref(null)
 
 const formHandled = () => {
-  emit('submit', { text: todoText.value })
+  store.addTodo({ text: todoText.value })
   todoText.value = ''
   inputText.value.focus()
 }
