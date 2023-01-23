@@ -1,6 +1,12 @@
 import { createApp } from 'vue'
+import { initLibs } from './libs'
+
 import './styles/main.scss'
 
 import App from './App.vue'
 
-createApp(App).mount('#app')
+const app = createApp(App)
+
+initLibs(app)
+
+app.mount('#app')
