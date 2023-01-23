@@ -1,0 +1,18 @@
+.btn {
+	border: none;
+	border-radius: 6px;
+	color: #fff;
+	flex-grow: 1;
+	font-size: 1rem;
+	height: 36px;
+	line-height: 20px;
+	padding: 0 16px 0 16px;
+	color: white;
+	cursor: pointer;
+	&.btn-gray {
+		background-color: #353535;
+		&:hover {
+			background-color: #2e2e2e;
+		}
+	}
+}
