@@ -1,29 +1,38 @@
 <script setup>
-import HelloWorld from './components/HelloWorld.vue'
+import { reactive } from 'vue'
+
+import TodoForm from './components/TodoForm.vue'
+import TodoList from './components/TodoList.vue'
+import { addTodo, getTodos, removeTodo } from './service/todo'
+
+const state = reactive({
+  todos: getTodos()
+})
+
+const formHandled = (todo) => {
+  state.todos = [...addTodo(todo.text)]
+}
+
+const removeTodoHandled = (id) => {
+  state.todos = [...removeTodo(id)]
+}
 </script>
 
 <template>
-  <div>
-    <a href="https://vitejs.dev" target="_blank">
-      <img src="/vite.svg" class="logo" alt="Vite logo" />
-    </a>
-    <a href="https://vuejs.org/" target="_blank">
-      <img src="./assets/vue.svg" class="logo vue" alt="Vue logo" />
-    </a>
+  <div class="content">
+    <h2>Todo List</h2>
+    <TodoForm
+      @submit="formHandled"
+    />
+    <TodoList
+      @onRemoveElement="removeTodoHandled"
+      :todos="state.todos"
+    />
   </div>
-  <HelloWorld msg="Vite + Vue" />
 </template>
 
 <style scoped>
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-}
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
-}
-.logo.vue:hover {
-  filter: drop-shadow(0 0 2em #42b883aa);
+h2 {
+  text-align: center;
 }
 </style>
