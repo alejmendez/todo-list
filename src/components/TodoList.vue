@@ -12,8 +12,12 @@ const { toggleCompleted, deleteTodo } = store
   <ul>
     <li v-for="todo in todosList" :key="todo.id">
       <div :class="{ completed: todo.completed, text: true }" :title="todo.text" v-text="todo.text" />
-      <input class="btn btn-gray toggle" type="submit" value="&#10004;" @click="toggleCompleted(todo.id)" />
-      <input class="btn btn-gray delete" type="submit" value="&#10060;" @click="deleteTodo(todo.id)" />
+      <button class="btn btn-gray toggle" @click="toggleCompleted(todo.id)">
+        <font-awesome-icon icon="fa-solid fa-xmark" />
+      </button>
+      <button class="btn btn-gray delete" @click="deleteTodo(todo.id)">
+        <font-awesome-icon icon="fa-solid fa-check" />
+      </button>
     </li>
   </ul>
 </template>
@@ -30,8 +34,7 @@ ul {
     transition: all 0.3s;
 
     span {
-      margin-left: 8px;
-      margin-top: 8px;
+      margin: 8px 0;
     }
 
     &:hover {
@@ -41,6 +44,11 @@ ul {
 
     .btn {
       float: right;
+      width: 36px;
+      padding: 0 10px;
+      &.delete  {
+        margin-right: 5px;
+      }
     }
 
     .text {
