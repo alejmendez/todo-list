@@ -5,18 +5,29 @@ import { useTodoListStore } from '../store/useTodoListStore'
 const store = useTodoListStore()
 
 const { todosList } = storeToRefs(store)
-const { toggleCompleted, deleteTodo } = store
+const { toggleCompleted, editTodo, deleteTodo } = store
+
+const handlerEdit = (todo) => {
+  todo.text = prompt("Nueva texto", todo.text)
+  editTodo(todo)
+}
 </script>
 
 <template>
   <ul>
     <li v-for="todo in todosList" :key="todo.id">
-      <div :class="{ completed: todo.completed, text: true }" :title="todo.text" v-text="todo.text" />
+      <div
+        :class="{ completed: todo.completed, text: true }"
+        :title="todo.text"
+        v-text="todo.text"
+        @click="handlerEdit(todo)"
+      />
+
       <button class="btn btn-gray toggle" @click="toggleCompleted(todo.id)">
-        <font-awesome-icon icon="fa-solid fa-xmark" />
+        <font-awesome-icon icon="fa-solid fa-check" />
       </button>
       <button class="btn btn-gray delete" @click="deleteTodo(todo.id)">
-        <font-awesome-icon icon="fa-solid fa-check" />
+        <font-awesome-icon icon="fa-solid fa-xmark" />
       </button>
     </li>
   </ul>

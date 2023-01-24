@@ -14,6 +14,13 @@ export const useTodoListStore = defineStore("todoList", {
       this.todosList.push(todo);
       ls.set(todo);
     },
+    editTodo(item) {
+      const todo = this.todosList.find(o => o.id === item.id);
+      if (todo) {
+        todo.text = item.text;
+        ls.set(todo);
+      }
+    },
     deleteTodo(id) {
       this.todosList = this.todosList.filter(o => o.id !== id);
       ls.del(id);
